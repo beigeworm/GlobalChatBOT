@@ -2,10 +2,6 @@
 Global chat across multiple Discord servers and DM's!
 
 
-
-
-# GlobalChatBOT
-
 ![chatex](https://github.com/user-attachments/assets/2fc91344-ba21-4129-969e-50c2292ae051)
 
 **Features**

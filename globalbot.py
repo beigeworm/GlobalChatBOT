@@ -67,6 +67,9 @@ async def on_guild_remove(guild):
 
 @bot.event
 async def on_message(message):
+    if message.author.bot:
+        return
+
     if message.author == bot.user:
         return
 
@@ -109,7 +112,7 @@ async def on_message(message):
                                 print(f"Failed to send message to channel {channel.id} in guild {channel.guild.id}: {e}")
                         elif isinstance(channel, discord.DMChannel):
                             try:
-                                await channel.send(f"From DM channel - Username: `{message.author.name}` \n{message.content}")
+                                await channel.send(f"-# Username: `{message.author.name}` \n{message.content}")
                             except Exception as e:
                                 print(f"Failed to send message to DM channel {channel.id}: {e}")
         return
@@ -130,8 +133,8 @@ async def on_message(message):
             return
 
         if len(user_message_times[(message.guild.id, message.author.id)]) > 1 and \
-                now - user_message_times[(message.guild.id, message.author.id)][-2] < timedelta(seconds=10):
-            await message.channel.send(f":no_entry: {message.author.mention} **Message Not Sent** 10 second slow-mode enabled!")
+                now - user_message_times[(message.guild.id, message.author.id)][-2] < timedelta(seconds=5):
+            await message.channel.send(f":no_entry: {message.author.mention} **Message Not Sent** 5 second slow-mode enabled!")
             return
 
         if '@everyone' in message.content:
